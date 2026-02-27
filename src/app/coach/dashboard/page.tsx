@@ -6,11 +6,17 @@ import { mockPlayer, mockCoaches } from '@/lib/mockData';
 export default function CoachDashboard() {
     const [searchTerm, setSearchTerm] = useState('');
     const [activeTab, setActiveTab] = useState<'discover' | 'affiliated'>('discover');
+    const [requestedPlayers, setRequestedPlayers] = useState<string[]>([]);
 
     // For MVC, just show the single mock player in discover
     const filteredPlayers = mockPlayer.name.toLowerCase().includes(searchTerm.toLowerCase())
         ? [mockPlayer]
         : [];
+
+    const handleRequest = (playerId: string) => {
+        setRequestedPlayers(prev => [...prev, playerId]);
+        alert("Affiliation request sent to " + mockPlayer.name + "!");
+    };
 
     return (
         <main className="container" style={{ padding: '2rem' }}>
@@ -64,38 +70,47 @@ export default function CoachDashboard() {
                     </div>
 
                     <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                        {filteredPlayers.map(player => (
-                            <div key={player.id} className="card flex flex-col justify-between" style={{ padding: '1.5rem' }}>
-                                <div>
-                                    <div className="flex justify-between items-start mb-2">
-                                        <h3 style={{ fontSize: '1.25rem', margin: 0 }}>{player.name}</h3>
-                                        <span style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem', background: 'var(--surface-color-light)', borderRadius: '4px' }}>
-                                            {player.sport}
-                                        </span>
-                                    </div>
-                                    <p style={{ color: 'var(--primary-color)', fontWeight: 600, fontSize: '0.875rem' }}>{player.position}</p>
+                        {filteredPlayers.map(player => {
+                            const isRequested = requestedPlayers.includes(player.id);
 
-                                    <div className="flex justify-between mt-4 mb-4" style={{ textAlign: 'center', background: 'var(--bg-color)', padding: '1rem', borderRadius: '8px' }}>
-                                        <div>
-                                            <div style={{ fontWeight: 800, fontSize: '1.25rem' }}>{player.stats.ppg}</div>
-                                            <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>PPG</div>
+                            return (
+                                <div key={player.id} className="card flex flex-col justify-between" style={{ padding: '1.5rem' }}>
+                                    <div>
+                                        <div className="flex justify-between items-start mb-2">
+                                            <h3 style={{ fontSize: '1.25rem', margin: 0 }}>{player.name}</h3>
+                                            <span style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem', background: 'var(--surface-color-light)', borderRadius: '4px' }}>
+                                                {player.sport}
+                                            </span>
                                         </div>
-                                        <div>
-                                            <div style={{ fontWeight: 800, fontSize: '1.25rem' }}>{player.stats.apg}</div>
-                                            <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>APG</div>
-                                        </div>
-                                        <div>
-                                            <div style={{ fontWeight: 800, fontSize: '1.25rem' }}>{player.stats.rpg}</div>
-                                            <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>RPG</div>
+                                        <p style={{ color: 'var(--primary-color)', fontWeight: 600, fontSize: '0.875rem' }}>{player.position}</p>
+
+                                        <div className="flex justify-between mt-4 mb-4" style={{ textAlign: 'center', background: 'var(--bg-color)', padding: '1rem', borderRadius: '8px' }}>
+                                            <div>
+                                                <div style={{ fontWeight: 800, fontSize: '1.25rem' }}>{player.stats.ppg}</div>
+                                                <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>PPG</div>
+                                            </div>
+                                            <div>
+                                                <div style={{ fontWeight: 800, fontSize: '1.25rem' }}>{player.stats.apg}</div>
+                                                <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>APG</div>
+                                            </div>
+                                            <div>
+                                                <div style={{ fontWeight: 800, fontSize: '1.25rem' }}>{player.stats.rpg}</div>
+                                                <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>RPG</div>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <button
+                                        className={`btn ${isRequested ? 'btn-secondary' : 'btn-primary'}`}
+                                        style={{ width: '100%', padding: '0.75rem', opacity: isRequested ? 0.7 : 1 }}
+                                        onClick={() => handleRequest(player.id)}
+                                        disabled={isRequested}
+                                    >
+                                        {isRequested ? 'Request Pending' : 'Request Affiliation'}
+                                    </button>
                                 </div>
-
-                                <button className="btn btn-primary" style={{ width: '100%', padding: '0.75rem' }}>
-                                    Request Affiliation
-                                </button>
-                            </div>
-                        ))}
+                            );
+                        })}
 
                         {filteredPlayers.length === 0 && (
                             <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>

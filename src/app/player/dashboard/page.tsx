@@ -3,12 +3,14 @@
 import { useState } from 'react';
 import { mockPlayer } from '@/lib/mockData';
 import ChatPanel from '@/components/ChatPanel';
+import { QRCodeSVG } from 'qrcode.react';
 
 export default function PlayerDashboard() {
     const [aiSummary, setAiSummary] = useState<string | null>(null);
     const [aiTraining, setAiTraining] = useState<string[] | null>(null);
     const [aiVendors, setAiVendors] = useState<{ name: string, description: string, link: string }[] | null>(null);
     const [loading, setLoading] = useState(false);
+    const [showQR, setShowQR] = useState(false);
 
     const generateAIInsights = async () => {
         setLoading(true);
@@ -51,7 +53,10 @@ export default function PlayerDashboard() {
         <main className="container" style={{ padding: '2rem', paddingBottom: '6rem' }}>
             <header className="flex justify-between items-center mb-4">
                 <h1>Player Dashboard</h1>
-                <button className="btn btn-secondary">Edit Profile</button>
+                <div className="flex gap-2">
+                    <button className="btn btn-primary" onClick={() => setShowQR(true)}>QR Code</button>
+                    <button className="btn btn-secondary">Edit Profile</button>
+                </div>
             </header>
 
             <div className="grid" style={{ gridTemplateColumns: 'minmax(300px, 1fr) 2fr', gap: '2rem' }}>
@@ -214,6 +219,20 @@ export default function PlayerDashboard() {
 
             {/* Floating Chat Panel */}
             <ChatPanel recipientName="Coach Carter" />
+
+            {/* QR Code Modal */}
+            {showQR && (
+                <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, backdropFilter: 'blur(4px)' }}>
+                    <div className="card" style={{ background: 'var(--surface-color)', textAlign: 'center', minWidth: '300px' }}>
+                        <h3 style={{ marginBottom: '1.5rem' }}>Your Profile QR Code</h3>
+                        <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', display: 'inline-block' }}>
+                            <QRCodeSVG value={typeof window !== 'undefined' ? window.location.href : 'https://gima.app/player/dashboard'} size={200} />
+                        </div>
+                        <div style={{ marginTop: '1.5rem', color: 'var(--text-muted)' }}>Scan to view your public profile</div>
+                        <button onClick={() => setShowQR(false)} className="btn btn-primary mt-4" style={{ width: '100%' }}>Close</button>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
