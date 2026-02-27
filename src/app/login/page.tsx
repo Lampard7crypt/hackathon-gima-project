@@ -5,11 +5,12 @@ import { useRouter } from 'next/navigation';
 
 export default function Login() {
     const router = useRouter();
-    const [role, setRole] = useState<'player' | 'coach'>('player');
+    const [email, setEmail] = useState('');
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
-        // Mock login: just redirect to the respective dashboard
+        // Mock login: coaches have @coach.gima.app emails, else player
+        const role = email.includes('coach') ? 'coach' : 'player';
         router.push(`/${role}/dashboard`);
     };
 
@@ -27,6 +28,8 @@ export default function Login() {
                             type="email"
                             required
                             placeholder="you@example.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-color)', color: 'var(--text-color)' }}
                         />
                     </div>
@@ -40,26 +43,6 @@ export default function Login() {
                             placeholder="••••••••"
                             style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-color)', color: 'var(--text-color)' }}
                         />
-                    </div>
-
-                    <div className="flex flex-col gap-1 mt-2">
-                        <label style={{ fontSize: '0.875rem', fontWeight: 600 }}>Log in as:</label>
-                        <div className="flex gap-2">
-                            <button
-                                type="button"
-                                onClick={() => setRole('player')}
-                                className={`btn ${role === 'player' ? 'btn-primary' : 'btn-secondary'}`}
-                                style={{ flex: 1 }}
-                            >Athlete
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => setRole('coach')}
-                                className={`btn ${role === 'coach' ? 'btn-primary' : 'btn-secondary'}`}
-                                style={{ flex: 1 }}
-                            >Coach
-                            </button>
-                        </div>
                     </div>
 
                     <button type="submit" className="btn btn-primary mt-4" style={{ width: '100%' }}>

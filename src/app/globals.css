@@ -179,3 +179,12 @@ p {
 .mt-4 { margin-top: 1rem; }
 .mb-4 { margin-bottom: 1rem; }
 .text-center { text-align: center; }
+
+@keyframes progressBar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.product-img:hover {
+  transform: scale(1.05);
+}
