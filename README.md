@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏀 GIMA (MVP)
+*For the Unstoppable: The Elite Platform for Adaptive Sports Athletes & Coaches*
 
-## Getting Started
+GIMA is a premium, specialized web application built to connect physically handicapped athletes (such as wheelchair basketball or rugby players) with coaches. Designed with an emphasis on accessibility and modern aesthetics, the platform serves as a "LinkedIn + Hudl" for adaptive sports, featuring real-time data tracking, communication tools, and powerful AI analysis capabilities.
 
-First, run the development server:
+## 🌟 Core Value Proposition
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Visually rich and technically robust, GIMA solves the fragmentation in adaptive sports by providing:
+1. **Athletes** a specialized platform to record their stats, track their injury history, generate performance QR codes, and gain instant, AI-driven insights on their career trajectory.
+2. **Coaches** a dedicated recruitment and analysis dashboard to discover top athletic talent, review their performance tables, and initiate direct communication.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Features (MVP)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Dual-Role Onboarding:** Seamlessly split user experiences tailored specifically for Athletes vs. Coaches.
+* **Player Dashboard:** 
+  * Beautiful glassmorphic UI displaying Career & Season Averages.
+  * Tabulated real-time tracking of Game History and Match Results (W/L metrics).
+  * Comprehensive Injury History timeline with clear recovery statuses.
+  * Instantly generate an embedded **QR Code** linking directly to the athlete's profile.
+* **Coach Dashboard:**
+  * Robust player discovery engine with multi-faceted search filters (Sport, Name, etc.).
+  * **Affiliation System:** Send and manage affiliation requests directly to promising athletes.
+* **Integrated Coach-Player Messaging:** A localized, floating Chat UI panel allowing coaches and affiliated players to communicate directly on the platform.
+* **AI Analysis Suite (Simulated API):**
+  * **One-Tap Summary:** Synthesizes the athlete's performance trends over time.
+  * **Training Recommendations:** AI-generated recovery and skill enhancement drills tailored to the specific disability and sport.
+  * **Vendor Assistance:** Matches athletes with specialized equipment vendors for custom wheelchairs and ergonomic frames.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Technology Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Designed entirely with custom styling for a bespoke, premium feel:
+* **Framework:** Next.js 15 (App Router)
+* **Language:** TypeScript
+* **Styling:** Vanilla CSS (CSS Variables, Flexbox/Grid, Glassmorphic rendering, explicitly avoiding generic utility frameworks like Tailwind for maximal uniqueness).
+* **Architecture:** Mocked Serverless API Endpoints (`/api/ai/*`) ready to scale into OpenAI LLM integration.
+* **Components:** React Hooks (`useState`), `qrcode.react`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🚀 Local Development Setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To run GIMA locally on your machine:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd gima
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Experience the app:**
+   Open [http://localhost:3000](http://localhost:3000) in your browser. 
+   
+   *Note: For the current MVP phase, authentication utilizes a Mock Auth Flow. You may enter any simulated email/password combination on the `/login` or `/register` screens to securely bypass and test the Athlete or Coach dashboards directly!*
