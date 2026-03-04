@@ -1,9 +1,9 @@
-# 🏀 GIMA (MVP)
+# GIMA (MVP)
 *For the Unstoppable: The Elite Platform for Adaptive Sports Athletes & Coaches*
 
 GIMA is a premium, specialized web application built to connect physically handicapped athletes (such as wheelchair basketball or rugby players) with coaches. Designed with an emphasis on accessibility and modern aesthetics, the platform serves as a "LinkedIn + Hudl" for adaptive sports, featuring real-time data tracking, communication tools, and powerful AI analysis capabilities.
 
-## 🌟 Core Value Proposition
+## Core Value Proposition
 
 Visually rich and technically robust, GIMA solves the fragmentation in adaptive sports by providing:
 1. **Athletes** a specialized platform to record their stats, track their injury history, generate performance QR codes, and gain instant, AI-driven insights on their career trajectory.
@@ -11,7 +11,7 @@ Visually rich and technically robust, GIMA solves the fragmentation in adaptive 
 
 ---
 
-## ✨ Features (MVP)
+## Features (MVP)
 
 * **Dual-Role Onboarding:** Seamlessly split user experiences tailored specifically for Athletes vs. Coaches.
 * **Player Dashboard:** 
@@ -30,7 +30,7 @@ Visually rich and technically robust, GIMA solves the fragmentation in adaptive 
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 Designed entirely with custom styling for a bespoke, premium feel:
 * **Framework:** Next.js 15 (App Router)
@@ -41,7 +41,7 @@ Designed entirely with custom styling for a bespoke, premium feel:
 
 ---
 
-## 🚀 Local Development Setup
+## Local Development Setup
 
 To run GIMA locally on your machine:
 
